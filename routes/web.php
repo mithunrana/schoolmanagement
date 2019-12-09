@@ -24,6 +24,9 @@ Route::get('/manage-student','student@studentManage');
 Route::post('/store-student','student@storeStudent');
 Route::get('/edit-student/{id}','student@editStudent');
 Route::get('/update-student/{id}','student@updateStudent');
+Route::get('/unique-student','student@uniqueStudent');
+
+Route::get('/add-result/{id}','student@addResult');
 
 
 Route::get('category','Blog@category');

@@ -18,11 +18,37 @@
         </section>
         <!-- Main content -->
         <section id="app"  class="content">
-            
+            <div style="max-width:800px;margin: 0 auto;padding:25px;background-color: #82cada">
+                <div class="row">
+                    <label> <strong style="font-size: 19px;">Name:</strong> {{$StudentProfile->name}}</label>
+                    <label class="pull-right"><strong style="font-size: 19px;">Class:</strong> {{$StudentProfile->classname->semestername}} &nbsp;&nbsp;<strong style="font-size: 19px;">Roll:</strong> {{$StudentProfile->roll}} </label>
+                </div>
+            </div>
+            <div  style="max-width:800px;margin: 0 auto;padding:25px;" class="bg-success">
+                <form action="/action_page.php">
+                    <div class="form-group">
+                        <label for="email">Bangla:</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">English:</label>
+                        <input type="password" class="form-control" id="pwd">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Math:</label>
+                        <input type="password" class="form-control" id="pwd">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Physics:</label>
+                        <input type="password" class="form-control" id="pwd">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
         </section>
     </div>
-    
-    
+
+
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
