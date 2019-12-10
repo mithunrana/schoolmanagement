@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\semesterlist;
+use App\result;
 class students extends Model
 {
     protected $guarded=[];
@@ -11,4 +12,5 @@ class students extends Model
     public function classname(){
         return $this->belongsTo(semesterlist::class,'semester');
     }
+    
 }

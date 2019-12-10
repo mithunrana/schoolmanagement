@@ -52,17 +52,6 @@
                                     <label for="roll">Roll:</label>
                                     <input  name="roll" type="int" v-model="rollno" v-on:keyup="StudentUniqueCheck" class="form-control" id="roll">
                                 </div>
-                                
-                                <div class="form-group" >
-                                    <label for="department">Select Department:</label>
-                                    <select  class="form-control" name="department">
-                                        <option value="" selected disabled>=======SELECT Department===========</option>
-                                        <option value="1">Computer</option>
-                                        <option value="2">Civil</option>
-                                        <option value="3">Electronics</option>
-                                        <option value="4">Electrical</option>
-                                    </select>
-                                </div>
                                 <button style="border-radius:0px;" type="submit" :disabled="disabled == 1" class="btn btn-success"><i class="fa fa-plus"></i> Add Stuent</button>
                                 @{{studentexisting}}
                             </form>
@@ -111,9 +100,9 @@
                             <td>{{$student->roll}}</td>
                             <td>
                                 <a style="border-radius:0px;" href="{{url('edit-student',[$student->id])}}" class="btn btn-primary">Edit</a>
-                                <a style="border-radius:0px;" class="btn btn-danger">Delete</a>
+                                <a style="border-radius:0px;" href="{{url('delete-student',[$student->id])}}" class="btn btn-danger">Delete</a>
                                 <a style="border-radius:0px;" href="{{url('add-result',[$student->id])}}" class=" btn btn-success">Add Result</a>
-                                <a style="border-radius:0px;" class="btn-info btn">View Result</a>
+                                <a style="border-radius:0px;" href="{{url('view-result',[$student->id])}}" class="btn-info btn">View Result</a>
                             </td>
                         </tr>
                         @endforeach

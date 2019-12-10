@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2019 at 10:24 AM
+-- Generation Time: Dec 10, 2019 at 10:32 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.2.23
 
@@ -45,7 +45,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_12_07_134656_create_subjectasigns_table', 1),
 (5, '2019_12_07_134715_create_results_table', 1),
 (6, '2019_12_07_143840_create_students_table', 1),
-(7, '2019_12_07_145955_create_semesterlists_table', 1);
+(7, '2019_12_07_145955_create_semesterlists_table', 1),
+(8, '2019_12_10_054930_create_results_table', 2);
 
 -- --------------------------------------------------------
 
@@ -67,11 +68,28 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `results` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `subject_assign_id` int(11) NOT NULL,
-  `mark` int(11) NOT NULL,
+  `std_id` bigint(20) NOT NULL,
+  `subject_id` bigint(20) NOT NULL,
+  `marks` int(11) NOT NULL,
+  `grade` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `results`
+--
+
+INSERT INTO `results` (`id`, `std_id`, `subject_id`, `marks`, `grade`, `created_at`, `updated_at`) VALUES
+(1, 12, 6, 50, 'A+', '2019-12-09 23:58:24', '2019-12-09 23:58:24'),
+(2, 12, 6, 50, 'A+', '2019-12-09 23:59:18', '2019-12-09 23:59:18'),
+(3, 12, 6, 60, 'A-', '2019-12-09 23:59:28', '2019-12-09 23:59:28'),
+(4, 12, 6, 60, 'A', '2019-12-10 00:00:20', '2019-12-10 00:00:20'),
+(5, 12, 5, 50, 'A-', '2019-12-10 00:00:49', '2019-12-10 00:00:49'),
+(6, 12, 4, 60, 'A-', '2019-12-10 00:01:19', '2019-12-10 00:01:19'),
+(7, 1, 6, 50, 'A', '2019-12-10 00:34:10', '2019-12-10 00:34:10'),
+(8, 1, 5, 50, 'B+', '2019-12-10 00:34:17', '2019-12-10 00:34:17'),
+(9, 1, 4, 50, 'B', '2019-12-10 03:15:30', '2019-12-10 03:15:30');
 
 -- --------------------------------------------------------
 
@@ -106,7 +124,7 @@ INSERT INTO `semesterlists` (`id`, `semestername`, `created_at`, `updated_at`) V
 --
 
 CREATE TABLE `students` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint(20) NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `roll` int(11) NOT NULL,
   `semester` int(11) NOT NULL,
@@ -131,8 +149,7 @@ INSERT INTO `students` (`id`, `name`, `roll`, `semester`, `department`, `created
 (10, 'MD Moniruzzaman', 56, 5, '2', '2019-12-08 06:11:35', '2019-12-08 09:00:05'),
 (11, 'Shakil Reza', 45, 6, '3', '2019-12-08 06:12:02', '2019-12-08 09:00:26'),
 (12, 'Md. Shahinur Rahman', 30, 3, '1', '2019-12-08 06:12:29', '2019-12-08 09:01:30'),
-(13, 'Salekin Sayeed', 17, 5, '1', '2019-12-08 06:16:44', '2019-12-08 09:01:10'),
-(14, 'Test Purpose', 31, 3, '2', '2019-12-08 21:22:10', '2019-12-08 21:22:10');
+(13, 'Salekin Sayeed', 17, 5, '1', '2019-12-08 06:16:44', '2019-12-08 09:01:10');
 
 -- --------------------------------------------------------
 
@@ -164,7 +181,7 @@ INSERT INTO `subjectasigns` (`id`, `subject_id`, `student_id`, `semester_id`, `c
 --
 
 CREATE TABLE `subjects` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint(20) NOT NULL,
   `subject_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `subject_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -220,7 +237,9 @@ ALTER TABLE `password_resets`
 -- Indexes for table `results`
 --
 ALTER TABLE `results`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `subject_id` (`subject_id`),
+  ADD KEY `std_id` (`std_id`);
 
 --
 -- Indexes for table `semesterlists`
@@ -261,13 +280,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `semesterlists`
@@ -279,7 +298,7 @@ ALTER TABLE `semesterlists`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `subjectasigns`
@@ -291,13 +310,24 @@ ALTER TABLE `subjectasigns`
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `results`
+--
+ALTER TABLE `results`
+  ADD CONSTRAINT `results_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `results_ibfk_2` FOREIGN KEY (`std_id`) REFERENCES `students` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

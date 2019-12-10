@@ -39,15 +39,6 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group" >
-                    <label for="department">Select Department:</label>
-                    <select  class="form-control" name="department">
-                        <option value="1">Class One</option>
-                        <option value="2">Class Two</option>
-                        <option value="3">Class Three</option>
-                        <option value="4">Class Four</option>
-                    </select>
-                </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
         </section>

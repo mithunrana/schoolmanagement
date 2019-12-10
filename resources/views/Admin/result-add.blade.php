@@ -25,26 +25,50 @@
                 </div>
             </div>
             <div  style="max-width:800px;margin: 0 auto;padding:25px;" class="bg-success">
-                <form action="/action_page.php">
+                <form method="post" action="{{url('store-result',[$StudentProfile->id])}}">
+                    @csrf
                     <div class="form-group">
-                        <label for="email">Bangla:</label>
-                        <input type="email" class="form-control" id="email">
+                        <label for="email">SELECT SUBJECT:</label>
+                        <select  class="form-control" name="subject" required>
+                            <option value="" selected disabled>==========SELECT SUBJECT============</option>
+                            @foreach(App\subject::orderBy('id', 'DESC')->get() as $sub)
+                            <option value="{{$sub->id}}">{{$sub->subject_name}}</option>
+                            @endforeach
+                        </select>
                     </div>
+
                     <div class="form-group">
-                        <label for="pwd">English:</label>
-                        <input type="password" class="form-control" id="pwd">
+                        <label for="marks">Mark:</label>
+                        <input type="number" min="0" max="200" name="marks" class="form-control" id="marks" required>
                     </div>
+
                     <div class="form-group">
-                        <label for="pwd">Math:</label>
-                        <input type="password" class="form-control" id="pwd">
+                        <select  class="form-control" name="grade" required>
+                            <option value="" selected disabled>==========SELECT GRADE============</option>
+                            <option value="A+">A+</option>
+                            <option value="A">A</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B">B</option>
+                            <option value="B-">B-</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option> 
+                        </select>
                     </div>
+
                     <div class="form-group">
-                        <label for="pwd">Physics:</label>
-                        <input type="password" class="form-control" id="pwd">
+                        <button type="submit" class="btn btn-info">SAVE RESULT</button>
+                        <a href="{{url('manage-student')}}" class="btn btn-primary pull-right">Return Back</a>
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
                 </form>
+                @if(Session::has('message'))
+                <div class="alert alert-success alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{Session::get('message')}}
+                </div>
+                @endif
             </div>
+
         </section>
     </div>
 
