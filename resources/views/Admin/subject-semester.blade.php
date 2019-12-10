@@ -98,8 +98,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for='row in subjectlist'>
-                            <td>1</td>
+                        <tr v-for='row,key in subjectlist'>
+                            <td>@{{++key}}</td>
                             <td>@{{row.subject_name}}</td>
                             <td>@{{row.subject_code}}</td>
                             <td>
@@ -122,8 +122,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for='row in semesterlist'>
-                            <td>1</td>
+                        <tr v-for='row,key in semesterlist'>
+                            <td>@{{++key}}</td>
                             <td>@{{row.semestername}}</td>
                             <td>
                                 <a style="border-radius:0px;" @click="SemesterEdit(row)" class="btn btn-primary">Edit</a>
