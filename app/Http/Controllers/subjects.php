@@ -21,4 +21,11 @@ class subjects extends Controller
             return ['success'=>true,'message'=>'Subject Update Sucessfully'];
         }
     }
+    
+    public function subjectDelete(Request $r){
+       if($r->has('id')){
+            subject::find($r->input('id'))->delete();
+            return ['success'=>true,'message'=>'Subject Delete  sucessfully'];
+        }
+    }
 }

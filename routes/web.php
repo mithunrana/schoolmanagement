@@ -14,6 +14,7 @@ Route::get('/add-subject-semester','semester@semesterSubjectManage');
 Route::get('/semester-store','semester@semesterSubjectManage');
 Route::post('/subject-store','subjects@subjectStore');
 Route::post('/subject-update','subjects@subjectUpdate');
+Route::post('/subject-delete','subjects@subjectDelete');
 Route::get('/subject-list','subjects@subjectList');
 Route::post('/semester-store','semester@semesterStore');
 Route::post('/semester-update','semester@semesterUpdate');
